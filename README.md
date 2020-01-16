@@ -1,4 +1,4 @@
-# Running SLiM in arrays, from Python, or on a computing cluster
+# Running SLiM in arrays, from Python, from R, and on a computing cluster
 
 You may find yourself in the situation that you have a SLiM (https://messerlab.org/slim/, https://github.com/MesserLab/SLiM) simulation with several defined parameters, and you want to try varying these parameters through a plausable range in order to determine how the model will perform in various configurations.
 
@@ -35,3 +35,7 @@ If you have access to a computing cluster, many times you will be submitting "jo
 ## BONUS - SLiM in R!
 
 SLiM can also be run using R. The "running_slim_using_r.r" script in this repository demonstrates this in a very minimal way. There may be better ways to do this - I do not know R as well as Python!
+
+## BONUS #2 - Using data from an array of SLiM runs!
+
+Being able to conveniently run SLiM many times means lots of data. For a fun example of what to do with such data, see "matplotlib_script.py".
