@@ -12,7 +12,7 @@ mkdir -p $WORKDIR
 # Run from wd, not from home - IMPORTANT
 cd $WORKDIR
 
-# Copy data over to working directory:
+# Copy files over to working directory:
 SCRIPT_LOCATION=/home/samchamper/slim/slim_from_python
 cp $SCRIPT_LOCATION/minimal_gene_drive.slim .
 cp $SCRIPT_LOCATION/minimal_slim_driver.py .

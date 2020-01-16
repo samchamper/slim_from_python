@@ -11,4 +11,4 @@ for homing_steps in range(10):
         res += 0.01
     res = 0.0
     homing += 0.01
-print("wait\ncd py_data\ncat *.part > array_with_python.csv\nrm *.part")
+print("wait\ncd py_data\ncat *.part > large_array_with_python.csv\nrm *.part")
