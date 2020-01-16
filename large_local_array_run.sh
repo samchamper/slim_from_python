@@ -100,5 +100,5 @@ python3 minimal_slim_driver.py -homing 0.59 -res 0.08 > py_data/99.part &
 python3 minimal_slim_driver.py -homing 0.59 -res 0.09 > py_data/100.part &
 wait
 cd py_data
-cat *.part > array_with_python.csv
+cat *.part > large_array_with_python.csv
 rm *.part
