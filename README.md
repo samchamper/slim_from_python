@@ -6,6 +6,8 @@ Naturally, you can just vary the parameters by hand and record the results. Howe
 
 In this situation, there are several options. This repository is designed to demostrate the basics of several methods to solve this problem!
 
+Note: the scripts in this repository all assume that SLiM is in your PATH Environment Variable. To check if it is, open a console and type "slim". If the SLiM version info and command line help pops up, you're good to go. Otherwise, you'll need to add it to PATH. If you don't know how, the method for doing so varies between operating systems - search for a tutorial that is right for yours.
+
 ## 1 - Using bash to run SLiM
 
 Just as you can use the defineConstant() function to... well... define constants within SLiM, you can use the command line "-d" argument to do so as well.
@@ -30,6 +32,6 @@ The idea of running SLiM in parallel with bash and running SLiM with python, can
 
 If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster herder. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a script to generate a file with the command line strings that will be used called "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh" and "SLURM.sh".
 
-## BONUS!
+## BONUS - SLiM in R!
 
 SLiM can also be run using R. The "running_slim_using_r.r" script in this repository demonstrates this in a very minimal way. There may be better ways to do this - I do not know R as well as Python!
