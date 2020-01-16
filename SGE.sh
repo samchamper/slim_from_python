@@ -6,10 +6,9 @@
 #$ -j y
 #$ -t 1-2500
 
-# Create working directory for job:
+# Create and move to working directory for job:
 WORKDIR=/SSD/$USER/$JOB_ID-$SGE_TASK_ID
 mkdir -p $WORKDIR
-# Run from wd, not from home - IMPORTANT
 cd $WORKDIR
 
 # Copy files over to working directory:
@@ -18,7 +17,7 @@ cp $SCRIPT_LOCATION/minimal_gene_drive.slim .
 cp $SCRIPT_LOCATION/minimal_slim_driver.py .
 cp $SCRIPT_LOCATION/params.txt .
 
-# Include SLiM3 in the path.
+# Include SLiM in the path.
 PATH=$PATH:/home/samchamper/slim/build
 export PATH
 
