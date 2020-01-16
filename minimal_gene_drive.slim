@@ -4,10 +4,10 @@
 
 initialize() {
     if (!exists("HOMING_SUCCESS_RATE"))
-        defineConstant("HOMING_SUCCESS_RATE", 1.0);
+        defineConstant("HOMING_SUCCESS_RATE", 0.9);
 
     if (!exists("RESISTANCE_FORMATION_RATE"))
-        defineConstant("RESISTANCE_FORMATION_RATE", 0.0);
+        defineConstant("RESISTANCE_FORMATION_RATE", 0.1);
 
     if (!exists("RECESSIVE_FEMALE_STERILE_SUPPRESSION"))
         defineConstant("RECESSIVE_FEMALE_STERILE_SUPPRESSION", F);
@@ -15,7 +15,7 @@ initialize() {
     defineConstant("DRIVE_FITNESS", 0.95);
     defineConstant("DROP_SIZE", 100);
     defineConstant("CAPACITY", 5000);
-    defineConstant("R1_OCCURRENCE_RATE", 0.1);  // Relative to R2.
+    defineConstant("R1_OCCURRENCE_RATE", 0.0001);  // Relative to R2.
 
     // This simulation will use a non-Wright-Fisher model.
     initializeSLiMModelType("nonWF");
@@ -58,7 +58,7 @@ function (void)addResistanceAllele(o<Genome>$ genome, i$ locus) {
 //// FUNCTION FOR GERMLINE RESISTANCE AND HOMING DRIVE.
 function (void)germline(o<Genome>$ child_chromosome, o<Individual>$ parent, f$ resistance_rate) {
     // Determine presence of drive in this parent and wt in the chromosome inherited from this parent.
-    if (sum(parent.genomes.countOfMutationsOfType(m2)) & sum(child_chromosome.countOfMutationsOfType(m1))); {
+    if (sum(parent.genomes.countOfMutationsOfType(m2)) & sum(child_chromosome.countOfMutationsOfType(m1))) {
         if (runif(1) < resistance_rate)
             // Resistance forms:
             addResistanceAllele(child_chromosome, 0);
@@ -99,12 +99,13 @@ function (f$)genotypeFitness(o<Individual>$ ind) {
 function (logical)isInfertile(o<Individual>$ ind) {
     // In the recessive female sterility drive, drive/drive females are sterile.
     // r2 also contributes to sterility.
-    dr_count = sum(ind.genomes.countOfMutationsOfType(m2));
-    r2_count = sum(ind.genomes.countOfMutationsOfType(m4));
-    if (RECESSIVE_FEMALE_STERILE_SUPPRESSION)
-        if (dr_count + r2_count == 2)
-            return T;
-    return F;
+    if (RECESSIVE_FEMALE_STERILE_SUPPRESSION) {
+        dr_count = sum(ind.genomes.countOfMutationsOfType(m2));
+        r2_count = sum(ind.genomes.countOfMutationsOfType(m4));
+            if (dr_count + r2_count == 2)
+                return T;
+        return F;
+    }
 }
 
 //// REPRODUCTION RULES FOR EACH FEMALE.
@@ -168,7 +169,7 @@ reproduction(NULL, "F") {
 }
 
 //// PROGRAM OUTPUT.
-56 late() {
+106 late() {
     // Calculate rates:
     all = sim.subpopulations.individuals;
     num_wt = sum(all.genomes.countOfMutationsOfType(m1));
