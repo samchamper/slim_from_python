@@ -22,7 +22,7 @@ In this repository, the "array_without_python.sh" file demonstrates how to accom
 
 You might find that you want to do some complex analyses on your data which are inconvenient to do from within SLiM itself. Perhaps you want to compare something about the population accross the entire time span of the simulation. If so, you can capture the results of SLiM within Python using the subprocess library, and then use all of your favorite python libraries to analyze the output!
 
-For a minimal example of such a driver, see the minimal_slim_driver.py file in this repository.
+For a fairly minimal example of such a driver, see the "minimal_slim_driver.py" file in this repository.
 
 ## 3 - Using Python and bash to run an array in parallel
 
@@ -30,7 +30,7 @@ The idea of running SLiM in parallel with bash and running SLiM with python, can
 
 ## 4 - Using Python on a computing cluster to run an array in parallel
 
-If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster herder. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a script to generate a file with the command line strings that will be used called "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh" and "SLURM.sh".
+If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster administrator. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a script to generate a file with the command line strings that will be used, called "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh" and "SLURM.sh".
 
 ## BONUS - SLiM in R!
 
