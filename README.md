@@ -1,6 +1,6 @@
 # Running SLiM in arrays, from Python, or on a computing cluster
 
-You may find yourself in the situation that you have a SLiM (https://github.com/MesserLab/SLiM) simulation with several defined parameters, and you want to try varying these parameters through a plausable range in order to determine how the model will perform in various configurations.
+You may find yourself in the situation that you have a SLiM (https://messerlab.org/slim/, https://github.com/MesserLab/SLiM) simulation with several defined parameters, and you want to try varying these parameters through a plausable range in order to determine how the model will perform in various configurations.
 
 Naturally, you can just vary the parameters by hand and record the results. However, that wouldn't be very fun once you have more than two or three parameters that you want to vary. Furthermore, running SLiM many times sequentially takes a lot longer than doing it in parallel!
 
