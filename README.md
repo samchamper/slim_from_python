@@ -4,7 +4,7 @@ You may find yourself in the situation that you have a SLiM (https://messerlab.o
 
 Naturally, you can just vary the parameters by hand and record the results. However, that wouldn't be very fun once you have more than two or three parameters that you want to vary. Furthermore, running SLiM many times sequentially takes a lot longer than doing it in parallel!
 
-In this situation, there are several options. This repository is designed to demostrate the basics of several of these methods!
+In this situation, there are several options. This repository is designed to demostrate the basics of several methods to solve this problem!
 
 ## 1 - Using bash to run SLiM
 
@@ -24,9 +24,9 @@ For a minimal example of such a driver, see the minimal_slim_driver.py file in t
 
 ## 3 - Using Python and bash to run an array in parallel
 
-The idea of running SLiM in parallel with bash and running SLiM with python, can of course, be combined. The "array_with_python.sh" script in this repository demonstrates this method.
+The idea of running SLiM in parallel with bash and running SLiM with python, can of course, be combined. The "array_with_python.sh" script in this repository demonstrates this method. This could also be combined with a script to generate a bash file: see "generate_large_local_array_run.py" and "large_local_array_run.sh".
 
 ## 4 - Using Python on a computing cluster to run an array in parallel
 
-If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster herder. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a quick script "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh" and "SLURM.sh".
+If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster herder. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a script to generate a file with the command line strings that will be used called "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh" and "SLURM.sh".
 
