@@ -1,4 +1,4 @@
-# Running SLiM in arrays, from Python, and on a computing cluster
+# Running SLiM in arrays, from Python, or on a computing cluster
 
 You may find yourself in the situation that you have a SLiM (https://github.com/MesserLab/SLiM) simulation with several defined parameters, and you want to try varying these parameters through a plausable range in order to determine how the model will perform in various configurations.
 
