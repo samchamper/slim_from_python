@@ -1,8 +1,8 @@
 #!/bin/bash
 #$ -S /bin/bash
 #$ -cwd
-#$ -N basic_gene_drive
-#$ -o SGE_output.txt
+#$ -N BASIC_DRIVE
+#$ -o output.txt
 #$ -j y
 #$ -t 1-2500
 
@@ -18,7 +18,7 @@ cp $SCRIPT_LOCATION/minimal_gene_drive.slim .
 cp $SCRIPT_LOCATION/minimal_slim_driver.py .
 cp $SCRIPT_LOCATION/params.txt .
 
-# Include SLiM in the path.
+# Include SLiM3 in the path.
 PATH=$PATH:/home/samchamper/slim/build
 export PATH
 
