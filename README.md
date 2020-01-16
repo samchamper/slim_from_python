@@ -30,3 +30,6 @@ The idea of running SLiM in parallel with bash and running SLiM with python, can
 
 If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster herder. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a script to generate a file with the command line strings that will be used called "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh" and "SLURM.sh".
 
+## BONUS!
+
+SLiM can also be run using R. The "running_slim_using_r.r" script in this repository demonstrates this in a very minimal way. There may be better ways to do this - I do not know R as well as Python!
