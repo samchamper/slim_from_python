@@ -3,9 +3,36 @@
 # This is an example of how to use Python as a driver for SLiM.
 # Output is formated as a csv, but just printed to stdout by default.
 
+# If using this process for a different research project,
+# run_slim() and configure_slim_command_line() do not need to be modified.
+# Changes you would likely want to make are to the argument parser in main(),
+# in order to pass your desired variables to SLiM, and to the parse_slim()
+# function, where you could do your desired operations on the output of SLiM.
+
 from argparse import ArgumentParser
 import subprocess
 import os
+
+
+def parse_slim(slim_string):
+    """
+    Parse the output of SLiM to extract whatever data we're looking for.
+    If we want to do a more complex analysis on the output of the SLiM file,
+    this is where we do it.
+    Args:
+        slim_string: the entire output of a run of SLiM.
+    Return
+        output: the desired output we want from the SLiM simulation.
+    """
+    # The example SLiM file has been configured such that all the
+    # output we want is printed on lines that start with "OUT:"
+    # so we'll discard all other output lines."
+    output = ""
+    lines = slim_string.split('\n')
+    for line in lines:
+        if line.startswith("OUT:"):
+            output += line.split(":")[1]  # Discard the "OUT:" from the output line.
+    return output
 
 
 def run_slim(command_line_args):
@@ -19,7 +46,7 @@ def run_slim(command_line_args):
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE,
                             universal_newlines=True)
-    # Info for debugging purposes:
+    # For debugging purposes:
     # std.out from the subprocess is in slim.communicate()[0]
     # std.error from the subprocess is in slim.communicate()[1]
     # To print errors from the subprocess, use the following:
@@ -29,25 +56,27 @@ def run_slim(command_line_args):
     return out
 
 
-def parse_slim(slim_string):
+def configure_slim_command_line(args_dict):
     """
-    Parse the output of SLiM to extract whatever data we're looking for.
-    If we want to do a more complex analysis on the output of the SLiM file,
-    this is where we do it.
+    Sets up a list of command line arguments for running SLiM.
     Args:
-        slim_string: the entire output of a run of SLiM.
+        args_dict: a dictionary of arg parser arguments.
     Return
-        output: the parsed output of SLiM
+        clargs: A formated list of the arguments.
     """
-    # The SLiM file has been configured that all the output we want is printed
-    # on lines that start with "PYTHON::"
-    # Discard all lines that don't start with "OUT:"
-    output = ""
-    lines = slim_string.split('\n')
-    for line in lines:
-        if line.startswith("OUT:"):
-            output += line.split(":")[1]  # Discard the "OUT:" from the output line.
-    return output
+    #We're running SLiM, so the first arg is simple:
+    clargs = "slim "
+    # The filename of the source file must be the last argument:
+    source = args_dict.pop("source")
+    # Add each argument from arg parser to the command line arguemnts for SLiM:
+    for arg in args_dict:
+        if isinstance(args_dict[arg], bool):
+            clargs += f"-d {arg}={'T' if args_dict[arg] else 'F'} "
+        else:
+            clargs += f"-d {arg}={args_dict[arg]} "
+    # Add the source file, and return the string split into a list.
+    clargs += source
+    return clargs.split()
 
 
 def main():
@@ -62,48 +91,38 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('-src', '--source', default="minimal_gene_drive.slim", type=str,
                         help=r"SLiM file to be run. Default 'minimal_gene_drive.slim'")
-    parser.add_argument('-header', '--print_header',
-                        dest='print_header', action='store_true', default=False,
+    parser.add_argument('-header', '--print_header', action='store_true', default=False,
                         help='If this is set, python prints a header for a csv file.')
 
+    # The all caps names of the following arguments must exactly match 
+    # the names of the constants we want to define in SLiM.
     parser.add_argument('-homing', '--HOMING_SUCCESS_RATE', default=1.0, type=float,
                         help='The drive homing rate. Default 100 percent.')
     parser.add_argument('-res', '--RESISTANCE_FORMATION_RATE', default=0.0, type=float,
                         help='The resistance formation rate. Default 0 percent.')
-    parser.add_argument('-suppression', '--RECESSIVE_FEMALE_STERILE_SUPPRESSION',
-                        dest='RECESSIVE_FEMALE_STERILE_SUPPRESSION', action='store_true', default=False,
-                        help='Toggles the drive to a suppression drive. Default is modifcation drive (non-suppression).')
+    parser.add_argument('-suppression', '--RECESSIVE_FEMALE_STERILE_SUPPRESSION', action='store_true', 
+                        default=False, help='Toggles from modification drive to suppression drive.')
 
     args_dict = vars(parser.parse_args())
 
-    # Print a header for the output. Probably only do this for the first SLiM sim in an array of sims:
+    # The '-header' argument prints a header for the output. This can
+    # help generate a nice CSV by adding this argument to the first SLiM run:
     if args_dict["print_header"]:
         print("Drive homing rate,Resistance formation rate,rate wt,rate dr," \
             "rate of function preserving resistance,rate of function disrupting resistance," \
             "rate of inds with at least 1 drive copy,ending pop size")
+    args_dict.pop("print_header")
 
-    # Next, assemble a list of all the command line arguments. We're running SLiM, so the first arg is simple:
-    clargs = ["slim"]
+    # Next, assemble the command line arguments in the way we want to for SLiM:
+    clargs = configure_slim_command_line(args_dict)
 
-    # Now add each argument from arg parser to the command line arguemnts for SLiM:
-    for arg in args_dict:
-        if arg == 'source' or arg == 'print_header':
-            continue
-        if isinstance(args_dict[arg], bool):
-            clargs.append('-d')
-            clargs.append(f"{arg}={'T' if args_dict[arg] else 'F'}")
-        else:
-            clargs.append('-d')
-            clargs.append(f"{arg}={args_dict[arg]}")
-    clargs.append(args_dict["source"])
-
-    # Run the file.
+    # Run the file with the desired arguments.
     slim_result = run_slim(clargs)
 
-    # Parse the result.
+    # Parse and analyze the result.
     parsed_result = parse_slim(slim_result)
 
-    # At this point, we could do anything we want with the data, but we'll just print it.
+    # Print the result.
     print(parsed_result)
 
 
