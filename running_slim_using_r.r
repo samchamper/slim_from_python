@@ -8,7 +8,7 @@ library(subprocess)
 new_proc <- spawn_process("/bin/sh")
 
 # Write to the shell process with the command line string we want to run.
-process_write(new_proc, "slim -d HOMING_SUCCESS_RATE=0.5 -d RESISTANCE_FORMATION_RATE=0.05 minimal_gene_drive.slim\n")
+process_write(new_proc, "slim -d HOMING_SUCCESS_RATE=0.5 -d RESISTANCE_FORMATION_RATE=0.01 minimal_gene_drive.slim\n")
 
 # It appears that unlike in Python, R does not automatically know when SLiM is finished running.
 # This while loop will wait until SLiM has printed a line that starts with "OUT:".

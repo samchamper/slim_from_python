@@ -4,7 +4,7 @@
 #SBATCH --partition=regular,regularA
 #SBATCH --job-name=BASIC_DRIVE
 #SBATCH --output=output.txt
-#SBATCH --array=1-250
+#SBATCH --array=1-153
 
 # Include SLiM3 in the path.
 PATH=$PATH:/home/samchamper/slim/build
@@ -12,11 +12,10 @@ export PATH
 
 # The jobs in this example repo are super short, and there is
 # overhead time associated scheduling them on the cluster. Thus,
-# each job will do ten runs of SLiM using this for loop:
+# each job will do 17 runs of SLiM using this for loop:
 
-startIndex=$(echo "($SLURM_ARRAY_TASK_ID-1)*10+1" | bc)
-
-for (( i=startIndex; i<startIndex+10; i++ ))
+startIndex=$(echo "($SLURM_ARRAY_TASK_ID-1)*17+1" | bc)
+for (( i=startIndex; i<startIndex+17; i++ ))
 do
     # Create and move to working directory for job:
     WORKDIR=/SSD/$USER/$JOB_ID-$i

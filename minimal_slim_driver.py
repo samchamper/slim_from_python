@@ -22,8 +22,9 @@ def run_slim(command_line_args):
     # Info for debugging purposes:
     # std.out from the subprocess is in slim.communicate()[0]
     # std.error from the subprocess is in slim.communicate()[1]
-    #err = slim.communicate()[1]
-    #print(err)
+    # To print errors from the subprocess, use the following:
+    # err = slim.communicate()[1]
+    # print(err)
     out = slim.communicate()[0]
     return out
 
@@ -45,7 +46,7 @@ def parse_slim(slim_string):
     lines = slim_string.split('\n')
     for line in lines:
         if line.startswith("OUT:"):
-            output += line.split(":")[1]  # Discard the "OUT:" from each line.
+            output += line.split(":")[1]  # Discard the "OUT:" from the output line.
     return output
 
 

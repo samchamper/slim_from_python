@@ -15,7 +15,7 @@ initialize() {
     defineConstant("DRIVE_FITNESS", 0.95);
     defineConstant("DROP_SIZE", 100);
     defineConstant("CAPACITY", 5000);
-    defineConstant("R1_OCCURRENCE_RATE", 0.0001);  // Relative to R2.
+    defineConstant("R1_OCCURRENCE_RATE", 0.0005);  // Relative to R2.
 
     // This simulation will use a non-Wright-Fisher model.
     initializeSLiMModelType("nonWF");
@@ -104,8 +104,8 @@ function (logical)isInfertile(o<Individual>$ ind) {
         r2_count = sum(ind.genomes.countOfMutationsOfType(m4));
             if (dr_count + r2_count == 2)
                 return T;
-        return F;
     }
+    return F;
 }
 
 //// REPRODUCTION RULES FOR EACH FEMALE.
