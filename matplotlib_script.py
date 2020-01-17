@@ -8,13 +8,13 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import pandas as pd
 import numpy as np
-import os
+from os.path import sep as SEP
 
 #We'll graph:
-# 'Drive homing rate' (col 0) on the X, 
+# 'Drive homing rate' (col 0) on the X,
 # 'Resistance formation rate' (col 1) on Y,
 # and outcome (final drive rate, (col 3)) on Z.
-data = pd.read_csv("SGE_data{}output.csv".format('\\' if os.name == 'nt' else '/')) # Use the right slash for the OS we're using.
+data = pd.read_csv(f"SGE_data{SEP}output.csv") # Use the right slash for the OS we're using.
 homing_rate = data.iloc[:,0]
 res_rate = data.iloc[:,1]
 final_rate = data.iloc[:,3]
