@@ -30,7 +30,7 @@ The idea of running SLiM in parallel with bash and running SLiM with python, can
 
 ## 4 - Using Python on a computing cluster to run an array in parallel
 
-If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster administrator. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a script to generate a file with the command line strings that will be used, called "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh" and "SLURM.sh".
+If you have access to a computing cluster, many times you will be submitting "jobs" to a "job scheduler". The scripts you will use to run an array of jobs depend on exactly what job scheduler your computer cluster uses, so go talk to your friendly cluster administrator. Included in this repository are scripts for running an array of jobs using two popular schedulers: the Sun Grid Engine (aka SGE), and SLURM. Files for these examples include a script to generate a file with the command line strings that will be used, called "generate_params_file.py", as well as "params.txt" and the cluster scripts themselves, "SGE.sh", "SLURM.sh" and "SLURM_simple.sh".
 
 ## BONUS - SLiM in R!
 

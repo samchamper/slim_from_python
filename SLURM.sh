@@ -6,7 +6,7 @@
 #SBATCH --output=output.txt
 #SBATCH --array=1-153
 
-# Include SLiM3 in the path.
+# Include SLiM in the path.
 PATH=$PATH:/home/samchamper/slim/build
 export PATH
 
