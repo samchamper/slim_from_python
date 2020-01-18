@@ -38,4 +38,4 @@ SLiM can also be run using R. The "running_slim_using_r.r" script in this reposi
 
 ## BONUS #2 - Using data from an array of SLiM runs!
 
-Being able to conveniently run SLiM many times means lots of data. For a fun example of what to do with such data, see "matplotlib_script.py".
+Being able to conveniently run SLiM many times means lots of data. For a fun example of what to do with such data, see "matplotlib_script.py" (this file has several Python package dependencies, so you may need to install them through your favorite Python package manager).
