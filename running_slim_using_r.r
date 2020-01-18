@@ -13,7 +13,7 @@ print(slim_out[length(slim_out)])
 # Running an array of simulations in parallel:
 library(foreach)
 library(doParallel)
-cl <- makeCluster(detectCores() - 1)
+cl <- makeCluster(future::availableCores())
 registerDoParallel(cl)
 
 # Vectors to vary the params. This will run a 4X4 array of SLiM runs:
