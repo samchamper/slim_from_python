@@ -11,7 +11,6 @@
 
 from argparse import ArgumentParser
 import subprocess
-import os
 
 
 def parse_slim(slim_string):
@@ -64,7 +63,7 @@ def configure_slim_command_line(args_dict):
     Return
         clargs: A formated list of the arguments.
     """
-    #We're running SLiM, so the first arg is simple:
+    # We're running SLiM, so the first arg is simple:
     clargs = "slim "
     # The filename of the source file must be the last argument:
     source = args_dict.pop("source")
@@ -94,13 +93,13 @@ def main():
     parser.add_argument('-header', '--print_header', action='store_true', default=False,
                         help='If this is set, python prints a header for a csv file.')
 
-    # The all caps names of the following arguments must exactly match 
+    # The all caps names of the following arguments must exactly match
     # the names of the constants we want to define in SLiM.
     parser.add_argument('-homing', '--HOMING_SUCCESS_RATE', default=1.0, type=float,
                         help='The drive homing rate. Default 100 percent.')
     parser.add_argument('-res', '--RESISTANCE_FORMATION_RATE', default=0.0, type=float,
                         help='The resistance formation rate. Default 0 percent.')
-    parser.add_argument('-suppression', '--RECESSIVE_FEMALE_STERILE_SUPPRESSION', action='store_true', 
+    parser.add_argument('-suppression', '--RECESSIVE_FEMALE_STERILE_SUPPRESSION', action='store_true',
                         default=False, help='Toggles from modification drive to suppression drive.')
 
     args_dict = vars(parser.parse_args())
