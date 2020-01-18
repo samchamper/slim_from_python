@@ -3,14 +3,12 @@
 // A toy gene-drive simulation.
 
 initialize() {
-    if (!exists("HOMING_SUCCESS_RATE"))
-        defineConstant("HOMING_SUCCESS_RATE", 0.9);
-
-    if (!exists("RESISTANCE_FORMATION_RATE"))
-        defineConstant("RESISTANCE_FORMATION_RATE", 0.1);
-
-    if (!exists("RECESSIVE_FEMALE_STERILE_SUPPRESSION"))
-        defineConstant("RECESSIVE_FEMALE_STERILE_SUPPRESSION", F);
+    // The following three params are intended to be varied via the command line -d argument.
+    // They are given default values using the defineCfgParam() helper function,
+    // which can be seen below. This is done to increase code readability.
+    defineCfgParam("HOMING_SUCCESS_RATE", 0.9);
+    defineCfgParam("RESISTANCE_FORMATION_RATE", 0.01);
+    defineCfgParam("RECESSIVE_FEMALE_STERILE_SUPPRESSION", F);
 
     defineConstant("DRIVE_FITNESS", 0.95);
     defineConstant("DROP_SIZE", 100);
@@ -43,6 +41,12 @@ initialize() {
 
     // Simulate sexual reproduction: A for autosome.
     initializeSex("A");
+}
+
+//// A HELPER FUNCTION FOR SETTING CONSTANTS THAT MIGHT BE CONFIGURED VIA COMMAND LINE.
+function (void) defineCfgParam(string$ name, lifs value) {
+    if (!exists(name))
+        defineConstant(name, value);
 }
 
 //// HELPER FUNCTION FOR FORMING A RESISTANCE ALLELE AT A GIVEN LOCUS.
