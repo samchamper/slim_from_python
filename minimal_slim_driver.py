@@ -45,13 +45,12 @@ def run_slim(command_line_args):
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE,
                             universal_newlines=True)
+    out, err = slim.communicate()
     # For debugging purposes:
     # std.out from the subprocess is in slim.communicate()[0]
     # std.error from the subprocess is in slim.communicate()[1]
-    # To print errors from the subprocess, use the following:
-    # err = slim.communicate()[1]
+    # Errors from the process can be printed with:
     # print(err)
-    out = slim.communicate()[0]
     return out
 
 
