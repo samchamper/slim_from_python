@@ -6,13 +6,19 @@
 slim_out <- system("slim -d HOMING_SUCCESS_RATE=0.5 -d RESISTANCE_FORMATION_RATE=0.01 minimal_gene_drive.slim", intern=TRUE)
 
 # Print only the last line, which is the desired output of this particular SLiM file.
-print(slim_out[length(slim_out)])
+print(substring(slim_out[length(slim_out)],5))
 
 
 # A little more advanced:
 # Running an array of simulations in parallel:
+
+# NOTE: Installing the future library may not work on
+# a mac if xcode isn't installed.
+# To install xcode, open a terminal and run "xcode-select --install"
+
 library(foreach)
 library(doParallel)
+library(future)
 cl <- makeCluster(future::availableCores())
 registerDoParallel(cl)
 
