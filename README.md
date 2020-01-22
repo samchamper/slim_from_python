@@ -8,6 +8,8 @@ In this situation, there are several options. This repository is designed to dem
 
 Note: the scripts in this repository all assume that SLiM is in your PATH environment variable. To check if it is, open a console and type "slim". If the SLiM version info and command line help pops up, you're good to go. Otherwise, you'll need to add it to PATH. If you don't know how, the method for doing so varies between operating systems - search for a tutorial that is right for yours.
 
+Note 2: The scripts in this repository are compatible with Python version 3.6 and above.
+
 ## 1 - Preparing your SLiM file for command line configuration
 
 Just as you can use the defineConstant() function to... well... define constants within SLiM, you can use the command line "-d" argument to do so as well.
